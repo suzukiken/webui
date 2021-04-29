@@ -129,9 +129,9 @@ function App() {
               {
                 cfnExports.map((cfnExport, index) => (
                   <tr key={cfnExport.id}>
-                    <td>{cfnExport.id}</td>
-                    <td>{cfnExport.sku}</td>
+                    <td>{cfnExport.stack}</td>
                     <td>{cfnExport.name}</td>
+                    <td>{cfnExport.value}</td>
                   </tr>
                 ))
               }
