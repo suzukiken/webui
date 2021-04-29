@@ -9,7 +9,7 @@ phases:
       - envsubst < aws-exports.template.js > src/aws-exports.js
       - npm run build
 artifacts:
-  base_directory: build
+  base-directory: build
   files:
     - '**/*'
 cache:
