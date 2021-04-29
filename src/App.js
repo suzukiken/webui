@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Amplify, { Auth, Hub, graphqlOperation, API } from 'aws-amplify';
 import awsconfig from './aws-exports';
-import { getIpaddress } from './graphql/queries';
+import { getIpaddress, listCloudFormationExports } from './graphql/queries';
 
 Amplify.configure(awsconfig);
 
@@ -9,6 +9,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
   const [ipaddress, setIpaddress] = useState(null);
+  const [cfnExports, setCfnExports] = useState([]);
 
   useEffect(() => {
     Hub.listen('auth', ({ payload: { event, data } }) => {
@@ -53,6 +54,13 @@ function App() {
     } catch (err) { console.log('error fetching ipaddress') }
   }
   
+  async function doListCfnExports() {
+    try {
+      const data = await API.graphql(graphqlOperation(listCloudFormationExports));
+      setCfnExports(data.data);
+    } catch (err) { console.log('error fetching CloudFormation exports') }
+  }
+  
   return (
     <div>
       <div className="hero-body">
@@ -95,6 +103,34 @@ function App() {
           onClick={doGetIpaddress}
           >Get IP address
         </button>
+      </section>
+      
+      <section className="section">
+        <button 
+          className="button"
+          onClick={doListCfnExports}
+          >List CloudFormation Exports
+        </button>
+        <table className="table is-fullwidth is-hoverable">
+          <thead>
+            <tr>
+              <th>Stack</th>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              cfnExports.map((cfnExport, index) => (
+                <tr key={cfnExport.id}>
+                  <td>{cfnExport.id}</td>
+                  <td>{cfnExport.sku}</td>
+                  <td>{cfnExport.name}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
       </section>
     </div>
   )

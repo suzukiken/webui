@@ -8,3 +8,12 @@ export const getIpaddress = /* GraphQL */ `
     }
   }
 `;
+export const listCloudFormationExports = /* GraphQL */ `
+  query ListCloudFormationExports {
+    listCloudFormationExports {
+      stack
+      name
+      value
+    }
+  }
+`;
