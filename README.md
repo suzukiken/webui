@@ -12,7 +12,7 @@ This is supposed to be used with CD with AWS CodePipeline.
 export COGNITO_IDPOOL_ID=ap-northeast-1:0a0a0a0a-0a-0a0a-0a0a0
 export COGNITO_USERPOOL_ID=ap-northeast-1_aaAAAA
 export COGNITO_USERPOOL_WEBCLIENT_ID=0a0aa0aa0aa
-export COGNITO_USERPOOL_DOMAINPREFIX=aaa
+export COGNITO_USERPOOL_DOMAINNAME=aaa
 export COGNITO_USERPOOL_SIGNIN_URL=https://aa.aaaa.aa/
 export COGNITO_USERPOOL_SIGNOUT_URL=https://aa.aaaa.aa/
 ```
