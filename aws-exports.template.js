@@ -16,7 +16,10 @@ const awsmobile = {
         "redirectSignOut": "${COGNITO_USERPOOL_SIGNOUT_URL}",
         "responseType": "code"
     },
-    "federationTarget": "COGNITO_USER_POOLS"
+    "federationTarget": "COGNITO_USER_POOLS",
+    "aws_appsync_graphqlEndpoint": "${APPSYNC_GRAPHQL_URL}",
+    "aws_appsync_region": "ap-northeast-1",
+    "aws_appsync_authenticationType": "AWS_IAM",
 };
 
 export default awsmobile;

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Amplify, { Auth, Hub } from 'aws-amplify';
+import Amplify, { Auth, Hub, graphqlOperation, API } from 'aws-amplify';
 import awsconfig from './aws-exports';
+import { getIpaddress } from './graphql/queries';
 
 Amplify.configure(awsconfig);
 
 function App() {
   const [user, setUser] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
+  const [ipaddress, setIpaddress] = useState(null);
 
   useEffect(() => {
     Hub.listen('auth', ({ payload: { event, data } }) => {
@@ -44,6 +46,13 @@ function App() {
       .catch(() => console.log('Not signed in'));
   }
   
+  async function doGetIpaddress() {
+    try {
+      const data = await API.graphql(graphqlOperation(getIpaddress));
+      setIpaddress(data.ipaddress);
+    } catch (err) { console.log('error fetching ipaddress') }
+  }
+  
   return (
     <div>
       <div className="hero-body">
@@ -75,6 +84,17 @@ function App() {
             </button>
           </div>
         </div>
+      </section>
+      
+      <section className="section">
+        <div className="block">
+          IP Address: <strong>{ipaddress ? ipaddress : 'None'}</strong>
+        </div>
+        <button 
+          className="button"
+          onClick={doGetIpaddress}
+          >Get IP address
+        </button>
       </section>
     </div>
   )

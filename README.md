@@ -15,6 +15,7 @@ export COGNITO_USERPOOL_WEBCLIENT_ID=0a0aa0aa0aa
 export COGNITO_USERPOOL_DOMAINNAME=aaa
 export COGNITO_USERPOOL_SIGNIN_URL=https://aa.aaaa.aa/
 export COGNITO_USERPOOL_SIGNOUT_URL=https://aa.aaaa.aa/
+export APPSYNC_GRAPHQL_URL=https://aa.aaaa.aa/
 ```
 
 These variables will be used to generate src/aws-exports.js
