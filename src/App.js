@@ -109,14 +109,14 @@ function App() {
         <p className="title">
           Listing of CloudFormation Exports
         </p>
-        <div class="block">
+        <div className="block">
           <button 
             className="button"
             onClick={doListCfnExports}
             >List CloudFormation Exports
           </button>
         </div>
-        <div class="block">
+        <div className="block">
           <table className="table is-fullwidth is-hoverable">
             <thead>
               <tr>
