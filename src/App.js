@@ -49,7 +49,7 @@ function App() {
   async function doGetIpaddress() {
     try {
       const data = await API.graphql(graphqlOperation(getIpaddress));
-      setIpaddress(data.ipaddress);
+      setIpaddress(data.data.getIpaddress.ipaddress);
     } catch (err) { console.log('error fetching ipaddress') }
   }
   
