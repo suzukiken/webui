@@ -57,10 +57,10 @@ function App() {
   async function doListCfnExports() {
     try {
       const data = await API.graphql(graphqlOperation(listCloudFormationExports));
-      setCfnExports(data.data);
+      setCfnExports(data.data.listCloudFormationExports);
     } catch (err) { console.log('error fetching CloudFormation exports') }
   }
-  
+
   return (
     <div>
       <div className="hero-body">
@@ -106,31 +106,38 @@ function App() {
       </section>
       
       <section className="section">
-        <button 
-          className="button"
-          onClick={doListCfnExports}
-          >List CloudFormation Exports
-        </button>
-        <table className="table is-fullwidth is-hoverable">
-          <thead>
-            <tr>
-              <th>Stack</th>
-              <th>Name</th>
-              <th>Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              cfnExports.map((cfnExport, index) => (
-                <tr key={cfnExport.id}>
-                  <td>{cfnExport.id}</td>
-                  <td>{cfnExport.sku}</td>
-                  <td>{cfnExport.name}</td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+        <p className="title">
+          Listing of CloudFormation Exports
+        </p>
+        <div class="block">
+          <button 
+            className="button"
+            onClick={doListCfnExports}
+            >List CloudFormation Exports
+          </button>
+        </div>
+        <div class="block">
+          <table className="table is-fullwidth is-hoverable">
+            <thead>
+              <tr>
+                <th>Stack</th>
+                <th>Name</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                cfnExports.map((cfnExport, index) => (
+                  <tr key={cfnExport.id}>
+                    <td>{cfnExport.id}</td>
+                    <td>{cfnExport.sku}</td>
+                    <td>{cfnExport.name}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
       </section>
     </div>
   )
